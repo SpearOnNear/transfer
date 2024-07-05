@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const accountId = urlParams.get('transactionHashes');
       console.log(accountId);
       const tg = window.Telegram.WebApp;
-      tg.sendData(accountId);
+      tg.sendData("success");
     });
   
     const urlParams = new URLSearchParams(window.location.search);
