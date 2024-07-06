@@ -7,14 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (initData) {
         try {
             // Parse JSON string back into object
-            const walletAmount = JSON.parse(initData);
+            const data = JSON.parse(initData);
     
             // Validate and use walletAmount object securely
-            console.log('Received wallet amount:', walletAmount);
+            console.log('Received wallet amount:', data);
     
             // Example usage
-            const currency = walletAmount.currency;
-            const amount = walletAmount.amount;
+            const currency = data.chat_id;
+            const amount = data.wallet;
             console.log(`Wallet amount: ${amount} ${currency}`);
         } catch (error) {
             console.error('Error parsing initData:', error);
