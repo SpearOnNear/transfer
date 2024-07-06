@@ -1,6 +1,29 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     
+    const urlParams = new URLSearchParams(window.location.search);
+    const initData = urlParams.get('data');
+    
+    if (initData) {
+        try {
+            // Parse JSON string back into object
+            const walletAmount = JSON.parse(initData);
+    
+            // Validate and use walletAmount object securely
+            console.log('Received wallet amount:', walletAmount);
+    
+            // Example usage
+            const currency = walletAmount.currency;
+            const amount = walletAmount.amount;
+            console.log(`Wallet amount: ${amount} ${currency}`);
+        } catch (error) {
+            console.error('Error parsing initData:', error);
+        }
+    } else {
+        console.error('No initData found in URL');
+    }
+
+
     if (window.location.pathname.endsWith('success.html')) {
         //   sendTelegramMessage(`<b>Transaction successful!</b>
       
@@ -78,7 +101,7 @@ function sendTelegramMessage(message) {
     else
     {
         const transactionData = {
-            amount: '20',
+            amount: '20 $TEXT',
             txType: 'tgroyale.testnet',
         };
     
