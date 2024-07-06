@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const initData = urlParams.get('data');
     
+    let walletID ='';
+
     if (initData) {
         try {
             // Parse JSON string back into object
@@ -15,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Example usage
             const currency = data.chat_id;
             const amount = data.wallet;
+            walletID = data.wallet;
             console.log(`Wallet amount: ${amount} ${currency}`);
         } catch (error) {
             console.error('Error parsing initData:', error);
@@ -102,7 +105,7 @@ function sendTelegramMessage(message) {
     {
         const transactionData = {
             amount: '20 $TEXT',
-            txType: 'tgroyale.testnet',
+            txType: walletID,
         };
     
         document.getElementById('amount').value = transactionData.amount;
