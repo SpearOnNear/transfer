@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = {
             type:"payment",
             status: "success",
-            txnLink: txnLink
+            txnLink: txnHash
         }
         const urlParams = new URLSearchParams(window.location.search);
         const accountId = urlParams.get('transactionHashes');
