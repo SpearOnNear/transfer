@@ -12,31 +12,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Update transaction details
-    function updateTransactionDetails(fromAccount, toAccount, amount, txnHash, txnLink) {
-        document.getElementById('fromAccount').textContent = fromAccount;
-        document.getElementById('toAccount').textContent = toAccount;
-        document.getElementById('amount').textContent = amount;
+    function updateTransactionDetails(txnHash, txnLink) {
         document.getElementById('shortenedHash').textContent = shortenTxnHash(txnHash);
         document.getElementById('txnLink').setAttribute('href', txnLink);
     }
     
-    // Example usage:
-    const fromAccount = 'tgroyale.testnet';
-    const toAccount = 'nearobot.testnet';
-    const amount = '20';
     const txnHash = 'BcSHfXsjTD2ABuefZsi5xyaNdXqm69y4pWjjDiFRFUqw';
-    const txnLink = `https://nearblocks.io/txns/${txnHash}`;
+    const txnLink = `https://testnet.nearblocks.io/txns/${txnHash}`;
     
     // Update transaction details on page load
-    updateTransactionDetails(fromAccount, toAccount, amount, txnHash, txnLink);
+    updateTransactionDetails(txnHash, txnLink);
     
     // Add event listener to continue button
     document.getElementById('continueBtn').addEventListener('click', function() {
+        const data = {
+            type:"payment",
+            status: "success",
+            txnLink: txnLink
+        }
         const urlParams = new URLSearchParams(window.location.search);
         const accountId = urlParams.get('transactionHashes');
         console.log(accountId);
         const tg = window.Telegram.WebApp;
-        tg.sendData("success");
+        tg.sendData(data);
     });
 
 });
