@@ -1,8 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    const transactionHases = urlParams.get('transactionHashes');
-    console.log(transactionHases);
+    const urlParams = new URLSearchParams(window.location.search);
+    const transactionHash = urlParams.get('transactionHashes');
 
     function shortenTxnHash(txnHash, charsToShow = 6) {
         if (txnHash.length <= charsToShow * 2) {
@@ -20,22 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('txnLink').setAttribute('href', txnLink);
     }
     
-    const txnHash = 'BcSHfXsjTD2ABuefZsi5xyaNdXqm69y4pWjjDiFRFUqw';
-    const txnLink = `https://testnet.nearblocks.io/txns/${txnHash}`;
+    const txnLink = `https://testnet.nearblocks.io/txns/${transactionHash}`;
     
     // Update transaction details on page load
-    updateTransactionDetails(txnHash, txnLink);
+    updateTransactionDetails(transactionHash, txnLink);
     
     // Add event listener to continue button
     document.getElementById('continueBtn').addEventListener('click', function() {
         const data = {
             type:"payment",
             status: "success",
-            txnLink: txnHash
+            txnLink: transactionHash
         }
-        const urlParams = new URLSearchParams(window.location.search);
-        const accountId = urlParams.get('transactionHashes');
-        console.log(accountId);
         const tg = window.Telegram.WebApp;
         tg.sendData(JSON.stringify(data));
     });
