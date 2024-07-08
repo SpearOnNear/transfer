@@ -1,6 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     
+    const transactionHases = urlParams.get('transactionHashes');
+    console.log(transactionHases);
+
     function shortenTxnHash(txnHash, charsToShow = 6) {
         if (txnHash.length <= charsToShow * 2) {
             return txnHash; // If already short, no need to change
