@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const urlParams = new URLSearchParams(window.location.search);
     const transactionHash = urlParams.get('transactionHashes');
-
+    const transactionTye = urlParams.get('type');
     function shortenTxnHash(txnHash, charsToShow = 6) {
         if (txnHash.length <= charsToShow * 2) {
             return txnHash; // If already short, no need to change
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listener to continue button
     document.getElementById('continueBtn').addEventListener('click', function() {
         const data = {
-            type:"payment",
+            type:transactionTye,
             status: "success",
             txnLink: transactionHash
         }
